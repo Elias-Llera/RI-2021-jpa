@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/test-classes" path="test">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-14">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.11.jar"/>
+	<classpathentry kind="lib" path="lib/create-meta-2.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-core-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-expressions-10.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-gherkin-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-gherkin-messages-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-java-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-junit-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-picocontainer-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/cucumber-plugin-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/datatable-3.4.0.jar"/>
+	<classpathentry kind="lib" path="lib/docstring-6.7.0.jar"/>
+	<classpathentry kind="lib" path="lib/html-formatter-9.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/messages-13.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/picocontainer-2.15.jar"/>
+	<classpathentry kind="lib" path="lib/tag-expressions-3.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.13.jar"/>
+	<classpathentry kind="lib" path="lib/apiguardian-api-1.1.0.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cws_services"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AlbUtil"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
