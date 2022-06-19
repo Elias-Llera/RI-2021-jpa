@@ -10,26 +10,26 @@ import uo.ri.cws.application.service.BusinessException;
  */
 public interface VehicleCrudService {
 
-	/**
-	 * @param plate number
-	 * @return an Optional with the vehicle dto specified be the plate number
-	 *
-	 * @throws BusinessException, DOES NOT
-	 */
-	Optional<VehicleDto> findVehicleByPlate(String plate)
-			throws BusinessException;
+    /**
+     * @param plate number
+     * @return an Optional with the vehicle dto specified be the plate number
+     *
+     * @throws BusinessException, DOES NOT
+     */
+    Optional<VehicleDto> findVehicleByPlate(String plate)
+	    throws BusinessException;
 
-	public static class VehicleDto {
-		public String id;
-		public long version;
+    public static class VehicleDto {
+	public String id;
+	public long version;
 
-		public String plate;
-		public String make;
-		public String model;
+	public String plate;
+	public String make;
+	public String model;
 
-		public String clientId;
-		public String vehicleTypeId;
+	public String clientId;
+	public String vehicleTypeId;
 
-	}
+    }
 
 }

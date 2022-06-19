@@ -16,39 +16,39 @@ import uo.ri.cws.application.util.command.CommandExecutor;
 
 public class ClientCrudServiceImpl implements ClientCrudService {
 
-	CommandExecutor executor = Factory.executor.forExecutor();
+    CommandExecutor executor = Factory.executor.forExecutor();
 
-	@Override
-	public ClientDto addClient(ClientDto client, String recommenderId)
-			throws BusinessException {
-		return executor.execute(new AddClient(client, recommenderId));
-	}
+    @Override
+    public ClientDto addClient(ClientDto client, String recommenderId)
+	    throws BusinessException {
+	return executor.execute(new AddClient(client, recommenderId));
+    }
 
-	@Override
-	public void deleteClient(String idClient) throws BusinessException {
-		executor.execute(new DeleteClient(idClient));
-	}
+    @Override
+    public void deleteClient(String idClient) throws BusinessException {
+	executor.execute(new DeleteClient(idClient));
+    }
 
-	@Override
-	public void updateClient(ClientDto client) throws BusinessException {
-		executor.execute(new UpdateClient(client));
-	}
+    @Override
+    public void updateClient(ClientDto client) throws BusinessException {
+	executor.execute(new UpdateClient(client));
+    }
 
-	@Override
-	public List<ClientDto> findAllClients() throws BusinessException {
-		return executor.execute(new FindAllClients());
-	}
+    @Override
+    public List<ClientDto> findAllClients() throws BusinessException {
+	return executor.execute(new FindAllClients());
+    }
 
-	@Override
-	public Optional<ClientDto> findClientById(String idClient)
-			throws BusinessException {
-		return executor.execute(new FindClientById(idClient));
-	}
+    @Override
+    public Optional<ClientDto> findClientById(String idClient)
+	    throws BusinessException {
+	return executor.execute(new FindClientById(idClient));
+    }
 
-	@Override
-	public List<ClientDto> findClientsRecommendedBy(String sponsorID)
-			throws BusinessException {
-		return executor.execute(new FindClientsRecommendedBy(sponsorID));
-	}
+    @Override
+    public List<ClientDto> findClientsRecommendedBy(String sponsorID)
+	    throws BusinessException {
+	return executor.execute(new FindClientsRecommendedBy(sponsorID));
+    }
 
 }

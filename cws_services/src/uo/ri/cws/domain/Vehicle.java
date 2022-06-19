@@ -15,79 +15,79 @@ import uo.ri.cws.domain.base.BaseEntity;
 @Entity
 @Table(name = "TVehicles")
 public class Vehicle extends BaseEntity {
-	// natural attributes
-	@Column(unique = true)
-	private String plateNumber;
-	private String make;
-	private String model;
+    // natural attributes
+    @Column(unique = true)
+    private String plateNumber;
+    private String make;
+    private String model;
 
-	// accidental attributes
-	@ManyToOne
-	private Client client;
-	@ManyToOne
-	private VehicleType vehicleType;
-	@OneToMany(mappedBy = "vehicle")
-	private Set<WorkOrder> workOrders = new HashSet<>();
+    // accidental attributes
+    @ManyToOne
+    private Client client;
+    @ManyToOne
+    private VehicleType vehicleType;
+    @OneToMany(mappedBy = "vehicle")
+    private Set<WorkOrder> workOrders = new HashSet<>();
 
-	Vehicle() {
-	}
+    Vehicle() {
+    }
 
-	public Vehicle(String plateNumber) {
-		ArgumentChecks.isNotEmpty(plateNumber);
+    public Vehicle(String plateNumber) {
+	ArgumentChecks.isNotEmpty(plateNumber);
 
-		this.plateNumber = plateNumber;
-	}
+	this.plateNumber = plateNumber;
+    }
 
-	public Vehicle(String plate, String make, String model) {
-		this(plate);
+    public Vehicle(String plate, String make, String model) {
+	this(plate);
 
-		ArgumentChecks.isNotEmpty(make);
-		ArgumentChecks.isNotEmpty(model);
+	ArgumentChecks.isNotEmpty(make);
+	ArgumentChecks.isNotEmpty(model);
 
-		this.make = make;
-		this.model = model;
-	}
+	this.make = make;
+	this.model = model;
+    }
 
-	public Set<WorkOrder> getWorkOrders() {
-		return new HashSet<>(workOrders);
-	}
+    public Set<WorkOrder> getWorkOrders() {
+	return new HashSet<>(workOrders);
+    }
 
-	protected Set<WorkOrder> _getWorkOrders() {
-		return workOrders;
-	}
+    protected Set<WorkOrder> _getWorkOrders() {
+	return workOrders;
+    }
 
-	protected void _setVehicleType(VehicleType vehicleType) {
-		this.vehicleType = vehicleType;
-	}
+    protected void _setVehicleType(VehicleType vehicleType) {
+	this.vehicleType = vehicleType;
+    }
 
-	public VehicleType getVehicleType() {
-		return vehicleType;
-	}
+    public VehicleType getVehicleType() {
+	return vehicleType;
+    }
 
-	protected void _setClient(Client client) {
-		this.client = client;
-	}
+    protected void _setClient(Client client) {
+	this.client = client;
+    }
 
-	public Client getClient() {
-		return client;
-	}
+    public Client getClient() {
+	return client;
+    }
 
-	public String getPlateNumber() {
-		return plateNumber;
-	}
+    public String getPlateNumber() {
+	return plateNumber;
+    }
 
-	public String getMake() {
-		return make;
-	}
+    public String getMake() {
+	return make;
+    }
 
-	public String getModel() {
-		return model;
-	}
+    public String getModel() {
+	return model;
+    }
 
-	@Override
-	public String toString() {
-		return "Vehicle [plateNumber=" + plateNumber + ", make=" + make
-				+ ", model=" + model + "]";
-	}
+    @Override
+    public String toString() {
+	return "Vehicle [plateNumber=" + plateNumber + ", make=" + make
+		+ ", model=" + model + "]";
+    }
 
 }

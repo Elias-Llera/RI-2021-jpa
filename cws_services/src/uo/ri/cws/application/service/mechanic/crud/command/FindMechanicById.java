@@ -13,20 +13,20 @@ import uo.ri.cws.domain.Mechanic;
 
 public class FindMechanicById implements Command<Optional<MechanicDto>> {
 
-	private String id;
-	private MechanicRepository repo = Factory.repository.forMechanic();
+    private String id;
+    private MechanicRepository repo = Factory.repository.forMechanic();
 
-	public FindMechanicById(String id) {
-		ArgumentChecks.isNotEmpty(id);
-		this.id = id;
-	}
+    public FindMechanicById(String id) {
+	ArgumentChecks.isNotEmpty(id);
+	this.id = id;
+    }
 
-	@Override
-	public Optional<MechanicDto> execute() throws BusinessException {
-		Optional<Mechanic> m = repo.findById(id);
+    @Override
+    public Optional<MechanicDto> execute() throws BusinessException {
+	Optional<Mechanic> m = repo.findById(id);
 
-		return m.isEmpty() ? Optional.empty()
-				: Optional.of(DtoAssembler.toDto(m.get()));
-	}
+	return m.isEmpty() ? Optional.empty()
+		: Optional.of(DtoAssembler.toDto(m.get()));
+    }
 
 }

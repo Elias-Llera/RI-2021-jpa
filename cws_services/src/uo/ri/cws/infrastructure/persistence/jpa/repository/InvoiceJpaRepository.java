@@ -9,26 +9,30 @@ import uo.ri.cws.infrastructure.persistence.jpa.util.BaseJpaRepository;
 import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
 public class InvoiceJpaRepository extends BaseJpaRepository<Invoice>
-		implements InvoiceRepository {
+	implements InvoiceRepository {
 
-	@Override
-	public Optional<Invoice> findByNumber(Long numero) {
-		return Jpa.getManager()
-				.createNamedQuery("Invoice.findByNumber", Invoice.class)
-				.getResultList().stream().findFirst();
-	}
+    @Override
+    public Optional<Invoice> findByNumber(Long numero) {
+	return Jpa.getManager()
+		.createNamedQuery("Invoice.findByNumber", Invoice.class)
+		.getResultStream()
+		.findFirst();
+    }
 
-	@Override
-	public Long getNextInvoiceNumber() {
-		Long nextNumber = Jpa.getManager()
-				.createNamedQuery("Invoice.getNextInvoiceNumber", Long.class)
-				.getSingleResult();
-		return nextNumber != null ? nextNumber : 1L;
-	}
+    @Override
+    public Long getNextInvoiceNumber() {
+	Long nextNumber = Jpa.getManager()
+		.createNamedQuery("Invoice.getNextInvoiceNumber", Long.class)
+		.getSingleResult();
+	return nextNumber != null ? nextNumber : 1L;
+    }
 
-	@Override
-	public List<Invoice> findUnusedWithBono500() {
-		throw new RuntimeException("Not yet implemented");
-	}
+    @Override
+    public List<Invoice> findUnusedWithBono500() {
+	return Jpa.getManager()
+		.createNamedQuery("Invoice.findUnusedWithBono500",
+			Invoice.class)
+		.getResultList();
+    }
 
 }

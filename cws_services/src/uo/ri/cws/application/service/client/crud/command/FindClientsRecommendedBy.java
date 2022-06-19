@@ -17,27 +17,27 @@ import uo.ri.cws.domain.Recommendation;
 
 public class FindClientsRecommendedBy implements Command<List<ClientDto>> {
 
-	private String sponsorID;
-	private ClientRepository repo = Factory.repository.forClient();
+    private String sponsorID;
+    private ClientRepository repo = Factory.repository.forClient();
 
-	public FindClientsRecommendedBy(String sponsorID) {
-		ArgumentChecks.isNotEmpty(sponsorID);
-		this.sponsorID = sponsorID;
+    public FindClientsRecommendedBy(String sponsorID) {
+	ArgumentChecks.isNotEmpty(sponsorID);
+	this.sponsorID = sponsorID;
+    }
+
+    @Override
+    public List<ClientDto> execute() throws BusinessException {
+	ArrayList<ClientDto> res = new ArrayList<>();
+
+	Optional<Client> co = repo.findById(sponsorID);
+	if (co.isPresent()) {
+	    Client client = co.get();
+	    Set<Recommendation> recommendations = client.getSponsored();
+	    for (Recommendation recommendation : recommendations) {
+		res.add(DtoAssembler.toDto(recommendation.getRecommended()));
+	    }
 	}
-
-	@Override
-	public List<ClientDto> execute() throws BusinessException {
-		ArrayList<ClientDto> res = new ArrayList<>();
-
-		Optional<Client> co = repo.findById(sponsorID);
-		if (co.isPresent()) {
-			Client client = co.get();
-			Set<Recommendation> recommendations = client.getSponsored();
-			for (Recommendation recommendation : recommendations) {
-				res.add(DtoAssembler.toDto(recommendation.getRecommended()));
-			}
-		}
-		return res;
-	}
+	return res;
+    }
 
 }

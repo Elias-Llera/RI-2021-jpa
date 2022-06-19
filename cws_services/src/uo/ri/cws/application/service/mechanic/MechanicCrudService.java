@@ -11,7 +11,7 @@ import uo.ri.cws.application.service.BusinessException;
  */
 public interface MechanicCrudService {
 
-	/**
+    /**
      * @formatter:off
      * 
      * Add a new mechanic to the system with the data specified in the DTO. The
@@ -29,9 +29,9 @@ public interface MechanicCrudService {
      * 
      * @formatter:on
      */
-	MechanicDto addMechanic(MechanicDto mechanic) throws BusinessException;
+    MechanicDto addMechanic(MechanicDto mechanic) throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * @param idMechanic the id of the mechanic to be deleted
@@ -43,9 +43,9 @@ public interface MechanicCrudService {
      * 
      * @formatter:on
      */
-	void deleteMechanic(String idMechanic) throws BusinessException;
+    void deleteMechanic(String idMechanic) throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * Updates values for the mechanic specified by the id field, just name and
@@ -61,9 +61,9 @@ public interface MechanicCrudService {
      * 
      * @formatter:on
      */
-	void updateMechanic(MechanicDto mechanic) throws BusinessException;
+    void updateMechanic(MechanicDto mechanic) throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * @param idMechanic The id of the mechanic to find
@@ -73,10 +73,10 @@ public interface MechanicCrudService {
      * 
      * @formatter:on
      */
-	Optional<MechanicDto> findMechanicById(String idMechanic)
-			throws BusinessException;
+    Optional<MechanicDto> findMechanicById(String idMechanic)
+	    throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * @param dniMechanic The dni of the mechanic to find
@@ -86,10 +86,10 @@ public interface MechanicCrudService {
      * 
      * @formatter:on
      */
-	Optional<MechanicDto> findMechanicByDni(String dniMechanic)
-			throws BusinessException;
+    Optional<MechanicDto> findMechanicByDni(String dniMechanic)
+	    throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
 
      * @return the list of all mechanics registered in the system without
@@ -100,14 +100,14 @@ public interface MechanicCrudService {
      * 
      * @formatter:on
      */
-	List<MechanicDto> findAllMechanics() throws BusinessException;
+    List<MechanicDto> findAllMechanics() throws BusinessException;
 
-	public static class MechanicDto {
-		public String id;
-		public Long version;
+    public static class MechanicDto {
+	public String id;
+	public Long version;
 
-		public String dni;
-		public String name;
-		public String surname;
-	}
+	public String dni;
+	public String name;
+	public String surname;
+    }
 }

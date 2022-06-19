@@ -6,6 +6,6 @@ package uo.ri.cws.application.service.sparepart;
  */
 public interface SparePartCrudService {
 
-	// ...
+    // ...
 
 }

@@ -10,29 +10,29 @@ import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
 public class JpaCommandExecutor implements CommandExecutor {
 
-	@Override
-	public <T> T execute(Command<T> cmd) throws BusinessException {
-		EntityManager mapper = Jpa.createEntityManager();
-		try {
-			EntityTransaction trx = mapper.getTransaction();
-			trx.begin();
+    @Override
+    public <T> T execute(Command<T> cmd) throws BusinessException {
+	EntityManager mapper = Jpa.createEntityManager();
+	try {
+	    EntityTransaction trx = mapper.getTransaction();
+	    trx.begin();
 
-			try {
-				T res = cmd.execute();
-				trx.commit();
+	    try {
+		T res = cmd.execute();
+		trx.commit();
 
-				return res;
+		return res;
 
-			} catch (BusinessException | RuntimeException ex) {
-				if (trx.isActive()) {
-					trx.rollback();
-				}
-				throw ex;
-			}
-		} finally {
-			if (mapper.isOpen()) {
-				mapper.close();
-			}
+	    } catch (BusinessException | RuntimeException ex) {
+		if (trx.isActive()) {
+		    trx.rollback();
 		}
+		throw ex;
+	    }
+	} finally {
+	    if (mapper.isOpen()) {
+		mapper.close();
+	    }
 	}
+    }
 }

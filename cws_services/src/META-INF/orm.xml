@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
-        http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+		http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd" version="2.2">
 
 	<!-- Vehicle queries --> 
 	<named-query name="Vehicle.findByPlate">
-		<query>select v from Vehicle v where v.plateNumber = ?1</query>
+		<query>
+			select v 
+			from Vehicle v
+			where v.plateNumber = ?1
+		</query>
 	</named-query>
 
 	<!-- WorkOrder queries --> 
 	<named-query name="WorkOrder.findByIds">
-		<query>select a from WorkOrder a where a.id in ?1</query>
+		<query>
+			select wo 
+			from WorkOrder wo
+			where wo.id in ?1
+		</query>
+	</named-query>
+	
+	<named-query name="WorkOrder.findNotInvoicedByClientDni">
+		<query>
+			select wo 
+			from WorkOrder wo
+			where wo.status = uo.ri.cws.domain.WorkOrder.WorkOrderStatus.FINISHED
+			and wo.vehicle.client.dni = ?1
+		</query>
 	</named-query>
 
 	<!-- PaymentMean queries -->
@@ -34,6 +51,38 @@
 		</query>
 	</named-query>
 	
+	<named-query name="PaymentMean.findCreditCardByNumber">
+		<query>
+			select c 
+			from CreditCard c 
+			where c.number = ?1
+		</query>
+	</named-query>
+	
+	<named-query name="PaymentMean.findVoucherByClientId">
+		<query>
+			select v 
+			from Voucher v 
+			where v.client.id = ?1
+		</query>
+	</named-query>
+
+	<named-query name="PaymentMean.findVoucherByCode">
+		<query>
+			select v
+			from Voucher v 
+			where v.code = ?1
+		</query>
+	</named-query>
+
+	<named-query name="PaymentMean.findAggregateVoucherDataByClientId">
+		<query>
+			select count(v), sum(v.available), sum(v.accumulated) 
+			from Voucher v
+			where v.client.id = ?1
+		</query>
+	</named-query>
+	
 	<!-- Mechanic queries -->
 	<named-query name="Mechanic.findByDni">
 		<query>
@@ -45,14 +94,30 @@
 
 	<!-- Invoice queries -->
 	<named-query name="Invoice.findByNumber">
-		<query>select f from Invoice f where f.number = ?1</query>
+		<query>
+			select i 
+			from Invoice i
+			where i.number = ?1
+		</query>
 	</named-query>
 	
 	<named-query name="Invoice.getNextInvoiceNumber">
-		<query>select max(f.number) + 1 from Invoice f</query>
+		<query>
+			select max(i.number) + 1 
+			from Invoice i
+		</query>
 	</named-query>
 	
-	<!-- Client queries -->>
+	<named-query name="Invoice.findUnusedWithBono500">
+		<query>
+			select i from Invoice i
+			where i.amount >= 500
+				and i.status = uo.ri.cws.domain.Invoice.InvoiceStatus.PAID
+				and not i.usedForVoucher
+		</query>
+	</named-query>
+	
+	<!-- Client queries -->
 	<named-query name="Client.findByDni">
 		<query>
 			select c 
@@ -61,21 +126,32 @@
 		</query>
 	</named-query>
 	
-<!-- 
-	Use this format if your query has 
-	numeric comparisons as the one in this example
-	
-	<named-query name="findItemsOnSaleByCategoryId">
+	<named-query name="Client.findSponsoredByClient">
 		<query>
-			<![CDATA[
-			select i 
-				from Item i join i.categories c
-				where c.id = ?2
-					and i.startDate <= ?1
-					and i.endDate >= ?1 
-			]]>
+			select c 
+			from Client c 
+			where c.recommended.id = ?1
 		</query>
 	</named-query>
- -->		
+	
+	<named-query name="Client.findWithThreeUnusedWorkOrders">
+		<query>
+			select c
+			from Client c
+			where(select count(w) from Client l
+				join l.vehicles v
+				join v.workOrders w
+				where w.usedForVoucher = false) >= 3 
+		</query>
+	</named-query>
+	
+	<named-query name="Client.findWithRecomendationsDone">
+		<query>
+			select distinct(s)
+			from Client c
+				join c.recommended r
+				join r.sponsor s 
+		</query>
+	</named-query>
 
 </entity-mappings>

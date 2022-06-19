@@ -14,53 +14,53 @@ import uo.ri.cws.domain.base.BaseEntity;
 @Entity
 @Table(name = "TVehicleTypes")
 public class VehicleType extends BaseEntity {
-	// natural attributes
-	@Column(unique = true)
-	private String name;
-	private double pricePerHour;
+    // natural attributes
+    @Column(unique = true)
+    private String name;
+    private double pricePerHour;
 
-	// accidental attributes
-	@OneToMany(mappedBy = "vehicleType")
-	private Set<Vehicle> vehicles = new HashSet<>();
+    // accidental attributes
+    @OneToMany(mappedBy = "vehicleType")
+    private Set<Vehicle> vehicles = new HashSet<>();
 
-	VehicleType() {
-	}
+    VehicleType() {
+    }
 
-	public VehicleType(String name) {
-		ArgumentChecks.isNotNull(name);
-		ArgumentChecks.isNotEmpty(name);
+    public VehicleType(String name) {
+	ArgumentChecks.isNotNull(name);
+	ArgumentChecks.isNotEmpty(name);
 
-		this.name = name;
-	}
+	this.name = name;
+    }
 
-	public VehicleType(String name, double pricePerHour) {
-		this(name);
+    public VehicleType(String name, double pricePerHour) {
+	this(name);
 
-		ArgumentChecks.isTrue(pricePerHour >= 0);
+	ArgumentChecks.isTrue(pricePerHour >= 0);
 
-		this.pricePerHour = pricePerHour;
-	}
+	this.pricePerHour = pricePerHour;
+    }
 
-	public Set<Vehicle> getVehicles() {
-		return new HashSet<>(vehicles);
-	}
+    public Set<Vehicle> getVehicles() {
+	return new HashSet<>(vehicles);
+    }
 
-	Set<Vehicle> _getVehicles() {
-		return vehicles;
-	}
+    Set<Vehicle> _getVehicles() {
+	return vehicles;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public double getPricePerHour() {
-		return pricePerHour;
-	}
+    public double getPricePerHour() {
+	return pricePerHour;
+    }
 
-	@Override
-	public String toString() {
-		return "VehicleType [name=" + name + ", pricePerHour=" + pricePerHour
-				+ "]";
-	}
+    @Override
+    public String toString() {
+	return "VehicleType [name=" + name + ", pricePerHour=" + pricePerHour
+		+ "]";
+    }
 
 }

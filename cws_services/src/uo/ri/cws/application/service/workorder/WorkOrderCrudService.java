@@ -8,20 +8,20 @@ import java.time.LocalDateTime;
  */
 public interface WorkOrderCrudService {
 
-	// ...
+    // ...
 
-	public static class WorkOrderDto {
-		public String id;
-		public long version;
+    public static class WorkOrderDto {
+	public String id;
+	public long version;
 
-		public String vehicleId;
-		public String description;
-		public LocalDateTime date;
-		public double total;
-		public String status;
-		public boolean usedForVoucher;
-		public String mechanicId;
-		public String invoiceId;
+	public String vehicleId;
+	public String description;
+	public LocalDateTime date;
+	public double total;
+	public String status;
+	public boolean usedForVoucher;
+	public String mechanicId;
+	public String invoiceId;
 
-	}
+    }
 }

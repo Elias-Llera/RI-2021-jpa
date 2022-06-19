@@ -12,65 +12,65 @@ import uo.ri.cws.domain.base.BaseEntity;
 @Table(name = "TRecommendations")
 public class Recommendation extends BaseEntity {
 
-	// natural attributes
-	private boolean usedForVoucher = false;
+    // natural attributes
+    private boolean usedForVoucher = false;
 
-	// accidental attributes
-	@ManyToOne
-	private Client sponsor;
-	@OneToOne
-	private Client recommended;
+    // accidental attributes
+    @ManyToOne
+    private Client sponsor;
+    @OneToOne
+    private Client recommended;
 
-	public Recommendation() {
-	}
+    public Recommendation() {
+    }
 
-	public Recommendation(Client sponsor, Client rec) {
-		ArgumentChecks.isNotNull(sponsor);
-		ArgumentChecks.isNotNull(rec);
-		Associations.Recommend.link(this, sponsor, rec);
-	}
+    public Recommendation(Client sponsor, Client rec) {
+	ArgumentChecks.isNotNull(sponsor);
+	ArgumentChecks.isNotNull(rec);
+	Associations.Recommend.link(this, sponsor, rec);
+    }
 
-	public Recommendation(Client sponsor, Client rec, boolean usedForVoucher) {
-		this(sponsor, rec);
-		this.usedForVoucher = usedForVoucher;
-	}
+    public Recommendation(Client sponsor, Client rec, boolean usedForVoucher) {
+	this(sponsor, rec);
+	this.usedForVoucher = usedForVoucher;
+    }
 
-	public boolean isUsedForVoucher() {
-		return usedForVoucher;
-	}
+    public boolean isUsedForVoucher() {
+	return usedForVoucher;
+    }
 
-	public Client getSponsor() {
-		return sponsor;
-	}
+    public Client getSponsor() {
+	return sponsor;
+    }
 
-	public Client getRecommended() {
-		return recommended;
-	}
+    public Client getRecommended() {
+	return recommended;
+    }
 
-	void _setSponsor(Client sponsor) {
-		this.sponsor = sponsor;
-	}
+    void _setSponsor(Client sponsor) {
+	this.sponsor = sponsor;
+    }
 
-	void _setRecommended(Client recommended) {
-		this.recommended = recommended;
-	}
+    void _setRecommended(Client recommended) {
+	this.recommended = recommended;
+    }
 
-	public void markAsUsed() {
-		this.usedForVoucher = true;
-	}
+    public void markAsUsed() {
+	this.usedForVoucher = true;
+    }
 
-	@Override
-	public String toString() {
-		return "Recommendation [usedForVoucher=" + usedForVoucher + ", sponsor="
-				+ sponsor + ", recommended=" + recommended + "]";
-	}
+    @Override
+    public String toString() {
+	return "Recommendation [usedForVoucher=" + usedForVoucher + ", sponsor="
+		+ sponsor + ", recommended=" + recommended + "]";
+    }
 
-	public boolean isValidForVoucher() {
-		return !usedForVoucher && recommended.hasPaidWorkOrder();
-	}
-	
-	public void markAsUsedForVoucher() {
-		usedForVoucher = true;
-	}
+    public boolean isValidForVoucher() {
+	return !usedForVoucher && recommended.hasPaidWorkOrder();
+    }
+
+    public void markAsUsedForVoucher() {
+	usedForVoucher = true;
+    }
 
 }

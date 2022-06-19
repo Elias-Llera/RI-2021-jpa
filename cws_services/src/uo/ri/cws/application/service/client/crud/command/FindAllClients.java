@@ -12,13 +12,13 @@ import uo.ri.cws.domain.Client;
 
 public class FindAllClients implements Command<List<ClientDto>> {
 
-	private ClientRepository repo = Factory.repository.forClient();
+    private ClientRepository repo = Factory.repository.forClient();
 
-	@Override
-	public List<ClientDto> execute() throws BusinessException {
-		List<Client> clients = repo.findAll();
+    @Override
+    public List<ClientDto> execute() throws BusinessException {
+	List<Client> clients = repo.findAll();
 
-		return DtoAssembler.toClientDtoList(clients);
-	}
+	return DtoAssembler.toClientDtoList(clients);
+    }
 
 }

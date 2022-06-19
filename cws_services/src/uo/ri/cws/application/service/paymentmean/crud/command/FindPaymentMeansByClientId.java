@@ -10,20 +10,22 @@ import uo.ri.cws.application.service.paymentmean.PaymentMeanCrudService.PaymentM
 import uo.ri.cws.application.util.DtoAssembler;
 import uo.ri.cws.application.util.command.Command;
 
-public class FindPaymentMeansByClientId implements Command<List<PaymentMeanDto>>{
+public class FindPaymentMeansByClientId
+	implements Command<List<PaymentMeanDto>> {
 
-	private String clientId;
-	PaymentMeanRepository paymentMeanRepository = Factory.repository.forPaymentMean();
-	
-	public FindPaymentMeansByClientId(String id) {
-		ArgumentChecks.isNotEmpty(id);
-		this.clientId = id;
-	}
+    private String clientId;
+    PaymentMeanRepository paymentMeanRepository = Factory.repository
+	    .forPaymentMean();
 
-	@Override
-	public List<PaymentMeanDto> execute() throws BusinessException {
-		return DtoAssembler.toPaymentMeanDtoList(
-				paymentMeanRepository.findByClientId(clientId));
-	}
+    public FindPaymentMeansByClientId(String id) {
+	ArgumentChecks.isNotEmpty(id);
+	this.clientId = id;
+    }
+
+    @Override
+    public List<PaymentMeanDto> execute() throws BusinessException {
+	return DtoAssembler.toPaymentMeanDtoList(
+		paymentMeanRepository.findByClientId(clientId));
+    }
 
 }

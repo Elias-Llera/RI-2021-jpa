@@ -6,16 +6,16 @@ package uo.ri.cws.application.service.vehicletype;
  */
 public interface VehicleTypeCrudService {
 
-	// ...
+    // ...
 
-	public static class VehicleTypeDto {
+    public static class VehicleTypeDto {
 
-		public String id;
-		public long version;
+	public String id;
+	public long version;
 
-		public String name;
-		public double pricePerHour;
-		public int minTrainigHours;
+	public String name;
+	public double pricePerHour;
+	public int minTrainigHours;
 
-	}
+    }
 }

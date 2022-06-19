@@ -8,18 +8,23 @@ import uo.ri.cws.infrastructure.persistence.jpa.util.BaseJpaRepository;
 import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
 public class WorkOrderJpaRepository extends BaseJpaRepository<WorkOrder>
-		implements WorkOrderRepository {
+	implements WorkOrderRepository {
 
-	@Override
-	public List<WorkOrder> findByIds(List<String> idsAveria) {
-		return Jpa.getManager()
-				.createNamedQuery("WorkOrder.findByIds", WorkOrder.class)
-				.setParameter(1, idsAveria).getResultList();
-	}
+    @Override
+    public List<WorkOrder> findByIds(List<String> idsAveria) {
+	return Jpa.getManager()
+		.createNamedQuery("WorkOrder.findByIds", WorkOrder.class)
+		.setParameter(1, idsAveria)
+		.getResultList();
+    }
 
-	@Override
-	public List<WorkOrder> findNotInvoicedWorkOrdersByClientDni(String dni) {
-		throw new RuntimeException("Not yet implemented");
-	}
+    @Override
+    public List<WorkOrder> findNotInvoicedWorkOrdersByClientDni(String dni) {
+	return Jpa.getManager()
+		.createNamedQuery("WorkOrder.findNotInvoicedByClientDni",
+			WorkOrder.class)
+		.setParameter(1, dni)
+		.getResultList();
+    }
 
 }

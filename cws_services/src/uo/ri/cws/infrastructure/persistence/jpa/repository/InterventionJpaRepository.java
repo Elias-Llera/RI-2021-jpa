@@ -9,17 +9,19 @@ import uo.ri.cws.infrastructure.persistence.jpa.util.BaseJpaRepository;
 import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
 public class InterventionJpaRepository extends BaseJpaRepository<Intervention>
-		implements InterventionRepository {
+	implements InterventionRepository {
 
-	@Override
-	public List<Intervention> findByMechanicIdBetweenDates(Long id,
-			LocalDateTime startDate, LocalDateTime endDate) {
+    @Override
+    public List<Intervention> findByMechanicIdBetweenDates(Long id,
+	    LocalDateTime startDate, LocalDateTime endDate) {
 
-		return Jpa.getManager()
-				.createNamedQuery("Intervention.findByMechanicIdBetweenDates",
-						Intervention.class)
-				.setParameter(1, id).setParameter(2, startDate)
-				.setParameter(3, endDate).getResultList();
-	}
+	return Jpa.getManager()
+		.createNamedQuery("Intervention.findByMechanicIdBetweenDates",
+			Intervention.class)
+		.setParameter(1, id)
+		.setParameter(2, startDate)
+		.setParameter(3, endDate)
+		.getResultList();
+    }
 
 }

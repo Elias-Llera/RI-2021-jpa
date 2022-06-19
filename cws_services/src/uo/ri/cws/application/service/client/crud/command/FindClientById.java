@@ -13,20 +13,20 @@ import uo.ri.cws.domain.Client;
 
 public class FindClientById implements Command<Optional<ClientDto>> {
 
-	private String idClient;
-	private ClientRepository repo = Factory.repository.forClient();
+    private String idClient;
+    private ClientRepository repo = Factory.repository.forClient();
 
-	public FindClientById(String idClient) {
-		ArgumentChecks.isNotEmpty(idClient);
-		this.idClient = idClient;
-	}
+    public FindClientById(String idClient) {
+	ArgumentChecks.isNotEmpty(idClient);
+	this.idClient = idClient;
+    }
 
-	@Override
-	public Optional<ClientDto> execute() throws BusinessException {
-		Optional<Client> c = repo.findById(idClient);
+    @Override
+    public Optional<ClientDto> execute() throws BusinessException {
+	Optional<Client> c = repo.findById(idClient);
 
-		return c.isEmpty() ? Optional.empty()
-				: Optional.of(DtoAssembler.toDto(c.get()));
-	}
+	return c.isEmpty() ? Optional.empty()
+		: Optional.of(DtoAssembler.toDto(c.get()));
+    }
 
 }

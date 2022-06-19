@@ -16,44 +16,44 @@ import uo.ri.cws.domain.WorkOrder;
 
 public class CreateInvoiceFor implements Command<InvoiceDto> {
 
-	private List<String> workOrderIds;
-	private WorkOrderRepository wrkrsRepo = Factory.repository.forWorkOrder();
-	private InvoiceRepository invsRepo = Factory.repository.forInvoice();
+    private List<String> workOrderIds;
+    private WorkOrderRepository wrkrsRepo = Factory.repository.forWorkOrder();
+    private InvoiceRepository invsRepo = Factory.repository.forInvoice();
 
-	public CreateInvoiceFor(List<String> workOrderIds) {
-		validate(workOrderIds);
-		this.workOrderIds = workOrderIds;
+    public CreateInvoiceFor(List<String> workOrderIds) {
+	validate(workOrderIds);
+	this.workOrderIds = workOrderIds;
+    }
+
+    @Override
+    public InvoiceDto execute() throws BusinessException {
+	Long number = invsRepo.getNextInvoiceNumber();
+	List<WorkOrder> workOrders = wrkrsRepo.findByIds(workOrderIds);
+
+	BusinessChecks.isTrue(workOrders.size() == workOrderIds.size(),
+		"Some work orders do not exist");
+
+	checkAllFinished(workOrders);
+
+	Invoice i = new Invoice(number, workOrders);
+	invsRepo.add(i);
+
+	return DtoAssembler.toDto(i);
+    }
+
+    private void validate(List<String> workOrderIds) {
+	ArgumentChecks.isNotNull(workOrderIds);
+	ArgumentChecks.isTrue(!workOrderIds.isEmpty());
+	for (String id : workOrderIds) {
+	    ArgumentChecks.isNotEmpty(id);
 	}
+    }
 
-	@Override
-	public InvoiceDto execute() throws BusinessException {
-		Long number = invsRepo.getNextInvoiceNumber();
-		List<WorkOrder> workOrders = wrkrsRepo.findByIds(workOrderIds);
-
-		BusinessChecks.isTrue(workOrders.size() == workOrderIds.size(),
-				"Some work orders do not exist");
-
-		checkAllFinished(workOrders);
-
-		Invoice i = new Invoice(number, workOrders);
-		invsRepo.add(i);
-
-		return DtoAssembler.toDto(i);
+    private void checkAllFinished(List<WorkOrder> workOrders)
+	    throws BusinessException {
+	for (WorkOrder workOrder : workOrders) {
+	    BusinessChecks.isTrue(workOrder.isFinished());
 	}
-
-	private void validate(List<String> workOrderIds) {
-		ArgumentChecks.isNotNull(workOrderIds);
-		ArgumentChecks.isTrue(!workOrderIds.isEmpty());
-		for (String id : workOrderIds) {
-			ArgumentChecks.isNotEmpty(id);
-		}
-	}
-
-	private void checkAllFinished(List<WorkOrder> workOrders)
-			throws BusinessException {
-		for (WorkOrder workOrder : workOrders) {
-			BusinessChecks.isTrue(workOrder.isFinished());
-		}
-	}
+    }
 
 }

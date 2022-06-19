@@ -11,7 +11,7 @@ import uo.ri.cws.application.service.BusinessException;
  */
 public interface ClientCrudService {
 
-	/**
+    /**
      * @formatter:off
      * 
      * Add a new client to the system with the data specified in the dto. The id
@@ -30,10 +30,10 @@ public interface ClientCrudService {
      * 
      * @formatter:on
      */
-	ClientDto addClient(ClientDto client, String recommenderId)
-			throws BusinessException;
+    ClientDto addClient(ClientDto client, String recommenderId)
+	    throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * @param idClient the id of the client to be deleted
@@ -43,9 +43,9 @@ public interface ClientCrudService {
      * 
      * @formatter:on
      */
-	void deleteClient(String idClient) throws BusinessException;
+    void deleteClient(String idClient) throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * Updates values for the client specified by the id field, except id and
@@ -59,9 +59,9 @@ public interface ClientCrudService {
      * 
      * @formatter:on
      */
-	void updateClient(ClientDto client) throws BusinessException;
+    void updateClient(ClientDto client) throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * @return the list of all clients registered in the system. It might be an
@@ -71,9 +71,9 @@ public interface ClientCrudService {
      * 
      * @formatter:on
      */
-	List<ClientDto> findAllClients() throws BusinessException;
+    List<ClientDto> findAllClients() throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
 	 * @param idClient The id of the client to find
@@ -85,10 +85,10 @@ public interface ClientCrudService {
      * 
      * @formatter:on
      */
-	Optional<ClientDto> findClientById(String idClient)
-			throws BusinessException;
+    Optional<ClientDto> findClientById(String idClient)
+	    throws BusinessException;
 
-	/**
+    /**
      * @formatter:off
      * 
      * @param sponsorID The id of the client who recommended the workshop to
@@ -102,23 +102,23 @@ public interface ClientCrudService {
      * 
      * @formatter:on
      */
-	List<ClientDto> findClientsRecommendedBy(String sponsorID)
-			throws BusinessException;
+    List<ClientDto> findClientsRecommendedBy(String sponsorID)
+	    throws BusinessException;
 
-	public static class ClientDto {
+    public static class ClientDto {
 
-		public String id;
-		public long version;
+	public String id;
+	public long version;
 
-		public String dni;
-		public String name;
-		public String surname;
-		public String addressStreet;
-		public String addressCity;
-		public String addressZipcode;
-		public String phone;
-		public String email;
+	public String dni;
+	public String name;
+	public String surname;
+	public String addressStreet;
+	public String addressCity;
+	public String addressZipcode;
+	public String phone;
+	public String email;
 
-	}
+    }
 
 }

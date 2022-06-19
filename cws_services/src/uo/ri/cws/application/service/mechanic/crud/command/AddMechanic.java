@@ -13,28 +13,28 @@ import uo.ri.cws.domain.Mechanic;
 
 public class AddMechanic implements Command<MechanicDto> {
 
-	private MechanicDto dto;
-	private MechanicRepository repo = Factory.repository.forMechanic();
+    private MechanicDto dto;
+    private MechanicRepository repo = Factory.repository.forMechanic();
 
-	public AddMechanic(MechanicDto dto) {
-		ArgumentChecks.isNotNull(dto);
-		this.dto = dto;
-	}
+    public AddMechanic(MechanicDto dto) {
+	ArgumentChecks.isNotNull(dto);
+	this.dto = dto;
+    }
 
-	@Override
-	public MechanicDto execute() throws BusinessException {
-		checkDoesNotExist(dto);
-		Mechanic m = new Mechanic(dto.dni, dto.name, dto.surname);
+    @Override
+    public MechanicDto execute() throws BusinessException {
+	checkDoesNotExist(dto);
+	Mechanic m = new Mechanic(dto.dni, dto.name, dto.surname);
 
-		repo.add(m);
+	repo.add(m);
 
-		dto.id = m.getId();
-		return dto;
-	}
+	dto.id = m.getId();
+	return dto;
+    }
 
-	private void checkDoesNotExist(MechanicDto dto) throws BusinessException {
-		Optional<Mechanic> om = repo.findByDni(dto.dni);
-		BusinessChecks.isTrue(om.isEmpty());
-	}
+    private void checkDoesNotExist(MechanicDto dto) throws BusinessException {
+	Optional<Mechanic> om = repo.findByDni(dto.dni);
+	BusinessChecks.isTrue(om.isEmpty());
+    }
 
 }

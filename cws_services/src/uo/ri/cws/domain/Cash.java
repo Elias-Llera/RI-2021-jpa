@@ -7,22 +7,22 @@ import javax.persistence.Table;
 @Table(name = "TCashes")
 public class Cash extends PaymentMean {
 
-	Cash() {
-	}
+    Cash() {
+    }
 
-	public Cash(Client client) {
-		Associations.Pay.link(client, this);
-	}
+    public Cash(Client client) {
+	Associations.Pay.link(client, this);
+    }
 
-	@Override
-	public String toString() {
-		return "Cash [getAccumulated()=" + getAccumulated() + ", getClient()="
-				+ getClient() + "]";
-	}
+    @Override
+    public String toString() {
+	return "Cash [getAccumulated()=" + getAccumulated() + ", getClient()="
+		+ getClient() + "]";
+    }
 
-	@Override
-	public boolean canPay(double amount) {
-		return true;
-	}
+    @Override
+    public boolean canPay(double amount) {
+	return true;
+    }
 
 }

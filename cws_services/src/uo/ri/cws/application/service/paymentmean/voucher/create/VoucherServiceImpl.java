@@ -15,29 +15,29 @@ import uo.ri.cws.application.util.command.CommandExecutor;
 
 public class VoucherServiceImpl implements VoucherService {
 
-	CommandExecutor executor = Factory.executor.forExecutor();
+    CommandExecutor executor = Factory.executor.forExecutor();
 
-	@Override
-	public int generateVouchers() throws BusinessException {
-		return executor.execute(new GenerateVouchers());
-	}
+    @Override
+    public int generateVouchers() throws BusinessException {
+	return executor.execute(new GenerateVouchers());
+    }
 
-	@Override
-	public Optional<VoucherDto> findVouchersById(String id)
-			throws BusinessException {
-		return executor.execute(new FindVoucherById(id));
-	}
+    @Override
+    public Optional<VoucherDto> findVouchersById(String id)
+	    throws BusinessException {
+	return executor.execute(new FindVoucherById(id));
+    }
 
-	@Override
-	public List<VoucherDto> findVouchersByClientId(String id)
-			throws BusinessException {
-		return executor.execute(new FindVouchersByClientId(id));
-	}
+    @Override
+    public List<VoucherDto> findVouchersByClientId(String id)
+	    throws BusinessException {
+	return executor.execute(new FindVouchersByClientId(id));
+    }
 
-	@Override
-	public List<VoucherSummaryDto> getVoucherSummary()
-			throws BusinessException {
-		return executor.execute(new GenerateVouchersSummary());
-	}
+    @Override
+    public List<VoucherSummaryDto> getVoucherSummary()
+	    throws BusinessException {
+	return executor.execute(new GenerateVouchersSummary());
+    }
 
 }

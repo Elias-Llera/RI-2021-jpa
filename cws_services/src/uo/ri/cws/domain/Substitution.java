@@ -10,65 +10,65 @@ import uo.ri.cws.domain.base.BaseEntity;
 
 @Entity
 @Table(name = "TSubstitutions", uniqueConstraints = {
-		@UniqueConstraint(columnNames = { "SPAREPART_ID",
-				"INTERVENTION_ID" }) })
+	@UniqueConstraint(columnNames = { "SPAREPART_ID",
+		"INTERVENTION_ID" }) })
 public class Substitution extends BaseEntity {
-	// natural attributes
-	private int quantity;
+    // natural attributes
+    private int quantity;
 
-	// accidental attributes
-	@ManyToOne
-	private SparePart sparePart;
-	@ManyToOne
-	private Intervention intervention;
+    // accidental attributes
+    @ManyToOne
+    private SparePart sparePart;
+    @ManyToOne
+    private Intervention intervention;
 
-	Substitution() {
-	}
+    Substitution() {
+    }
 
-	public Substitution(SparePart sp, Intervention intervention) {
-		ArgumentChecks.isNotNull(intervention);
-		ArgumentChecks.isNotNull(sp);
+    public Substitution(SparePart sp, Intervention intervention) {
+	ArgumentChecks.isNotNull(intervention);
+	ArgumentChecks.isNotNull(sp);
 
-		Associations.Sustitute.link(sp, this, intervention);
-	}
+	Associations.Sustitute.link(sp, this, intervention);
+    }
 
-	public Substitution(SparePart sparePart, Intervention intervention,
-			int quantity) {
-		this(sparePart, intervention);
+    public Substitution(SparePart sparePart, Intervention intervention,
+	    int quantity) {
+	this(sparePart, intervention);
 
-		ArgumentChecks.isTrue(quantity >= 1);
+	ArgumentChecks.isTrue(quantity >= 1);
 
-		this.quantity = quantity;
-	}
+	this.quantity = quantity;
+    }
 
-	void _setSparePart(SparePart sparePart) {
-		this.sparePart = sparePart;
-	}
+    void _setSparePart(SparePart sparePart) {
+	this.sparePart = sparePart;
+    }
 
-	void _setIntervention(Intervention intervention) {
-		this.intervention = intervention;
-	}
+    void _setIntervention(Intervention intervention) {
+	this.intervention = intervention;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public int getQuantity() {
+	return quantity;
+    }
 
-	public SparePart getSparePart() {
-		return sparePart;
-	}
+    public SparePart getSparePart() {
+	return sparePart;
+    }
 
-	public Intervention getIntervention() {
-		return intervention;
-	}
+    public Intervention getIntervention() {
+	return intervention;
+    }
 
-	@Override
-	public String toString() {
-		return "Substitution [quantity=" + quantity + ", sparePart=" + sparePart
-				+ ", intervention=" + intervention + "]";
-	}
+    @Override
+    public String toString() {
+	return "Substitution [quantity=" + quantity + ", sparePart=" + sparePart
+		+ ", intervention=" + intervention + "]";
+    }
 
-	public double getAmount() {
-		return sparePart.getPrice() * quantity;
-	}
+    public double getAmount() {
+	return sparePart.getPrice() * quantity;
+    }
 
 }

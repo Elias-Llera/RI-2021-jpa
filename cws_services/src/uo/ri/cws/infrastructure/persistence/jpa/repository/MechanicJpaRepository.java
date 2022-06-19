@@ -8,13 +8,15 @@ import uo.ri.cws.infrastructure.persistence.jpa.util.BaseJpaRepository;
 import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
 public class MechanicJpaRepository extends BaseJpaRepository<Mechanic>
-		implements MechanicRepository {
+	implements MechanicRepository {
 
-	@Override
-	public Optional<Mechanic> findByDni(String dni) {
-		return Jpa.getManager()
-				.createNamedQuery("Mechanic.findByDni", Mechanic.class)
-				.setParameter(1, dni).getResultList().stream().findFirst();
-	}
+    @Override
+    public Optional<Mechanic> findByDni(String dni) {
+	return Jpa.getManager()
+		.createNamedQuery("Mechanic.findByDni", Mechanic.class)
+		.setParameter(1, dni)
+		.getResultStream()
+		.findFirst();
+    }
 
 }

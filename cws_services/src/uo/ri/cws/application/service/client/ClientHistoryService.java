@@ -6,6 +6,6 @@ package uo.ri.cws.application.service.client;
  */
 public interface ClientHistoryService {
 
-	// ...
+    // ...
 
 }

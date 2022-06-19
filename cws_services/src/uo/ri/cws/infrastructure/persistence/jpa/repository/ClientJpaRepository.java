@@ -9,33 +9,47 @@ import uo.ri.cws.infrastructure.persistence.jpa.util.BaseJpaRepository;
 import uo.ri.cws.infrastructure.persistence.jpa.util.Jpa;
 
 public class ClientJpaRepository extends BaseJpaRepository<Client>
-		implements ClientRepository {
+	implements ClientRepository {
 
-	@Override
-	public Optional<Client> findByDni(String dni) {
-		return Jpa.getManager()
-				.createNamedQuery("Client.findByDni", Client.class)
-				.setParameter(1, dni).getResultList().stream().findFirst();
-	}
+    @Override
+    public Optional<Client> findByDni(String dni) {
+	return Jpa.getManager()
+		.createNamedQuery("Client.findByDni", Client.class)
+		.setParameter(1, dni)
+		.getResultStream()
+		.findFirst();
+    }
 
-	@Override
-	public List<Client> findSponsoredByClient(String id) {
-		throw new RuntimeException("Not yet implemented");
-	}
+    @Override
+    public List<Client> findSponsoredByClient(String id) {
+	return Jpa.getManager()
+		.createNamedQuery("Client.findSponsoredByClient", Client.class)
+		.setParameter(1, id)
+		.getResultList();
+    }
 
-	@Override
-	public List<Client> findRecomendedBy(String id) {
-		throw new RuntimeException("Not yet implemented");
-	}
+    @Override
+    public List<Client> findRecomendedBy(String id) {
+	return Jpa.getManager()
+		.createNamedQuery("Client.findSponsoredByClient", Client.class)
+		.setParameter(1, id)
+		.getResultList();
+    }
 
-	@Override
-	public List<Client> findWithThreeUnusedWorkOrders() {
-		throw new RuntimeException("Not yet implemented");
-	}
+    @Override
+    public List<Client> findWithThreeUnusedWorkOrders() {
+	return Jpa.getManager()
+		.createNamedQuery("Client.findWithThreeUnusedWorkOrders",
+			Client.class)
+		.getResultList();
+    }
 
-	@Override
-	public List<Client> findWithRecomendationsDone() {
-		throw new RuntimeException("Not yet implemented");
-	}
+    @Override
+    public List<Client> findWithRecomendationsDone() {
+	return Jpa.getManager()
+		.createNamedQuery("Client.findWithRecomendationsDone",
+			Client.class)
+		.getResultList();
+    }
 
 }
